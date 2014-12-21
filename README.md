@@ -1,11 +1,14 @@
-# neilgarb.co.za
-
-This codebase powers neilgarb.co.za.
-
-It isn't currently deployed, but will be deployed when in a working state.
-
 ## Running
 
-To run the HTTP server.
+To run the HTTP server:
 
     go run main.go
+
+To build the server:
+
+    go build
+    ./www
+
+For help:
+
+    ./www -h

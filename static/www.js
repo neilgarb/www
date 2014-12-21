@@ -1,8 +1,8 @@
 (function($) {
 
-    //--------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
     // Helper functions
-    //--------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     function debug() {
         $.each(arguments, function(k, v) {
@@ -10,50 +10,44 @@
         });
     }
 
-    //--------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
     // Flash
-    //--------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     var Flash = {};
 
-    Flash.info = function(msg) {
-        debug('Flash::info');
+    Flash.add = function(cls, msg) {
         var $p = $('<p/>')
-            .addClass('alert alert-success')
+            .addClass(cls)
             .html(msg)
             .prependTo($('#flash'));
-        setTimeout(function() { $p.fadeOut(); }, 4000);
+        this.remove($p);
+        $('#flash p:gt(2)').remove();
+    };
+
+    Flash.remove = function($el) {
+        setTimeout(function() {
+            $el.slideUp({
+                complete: function() {
+                    $(this).remove();
+                }
+            });
+        }, 4000);
+    };
+
+    Flash.info = function(msg) {
+        debug('Flash::info');
+        this.add('flash flash-info', msg)
     };
 
     Flash.error = function(msg) {
         debug('Flash::error');
-        var $p = $('<p/>')
-            .addClass('alert alert-danger')
-            .html(msg)
-            .prependTo($('#flash'));
-        setTimeout(function() { $p.fadeOut(); }, 4000);
+        this.add('flash flash-error', msg)
     };
 
-    //--------------------------------------------------------------------------
-    // A
-    //--------------------------------------------------------------------------
-
-    var A = function($a) {
-        this.$a = $a;
-        if (/^\//.test(this.$a.attr('href'))) {
-            this.$a.click(this.onClick.bind(this));
-        }
-    };
-
-    A.prototype.onClick = function(e) {
-        debug('A::onClick');
-        e.preventDefault();
-        History.pushState(null, this.$a.attr('title'), this.$a.attr('href'));
-    };
-
-    //--------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
     // Form
-    //--------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
     var Form = function($form) {
         this.$form = $form;
@@ -67,6 +61,8 @@
         $.ajax({
             url: this.$form.attr('action'),
             type: this.$form.attr('method'),
+            dataType: 'json',
+            data: this.$form.serialize(),
             success: this.onSuccess.bind(this),
             error: this.onError.bind(this)
         });
@@ -91,30 +87,57 @@
         });
     };
 
-    Form.prototype.onSuccess = function() {
+    Form.prototype.onSuccess = function(json) {
         debug('Form::onSuccess');
         this.enableSubmitButtons();
-        Flash.info('Success!');
+        this.clearErrors();
+        Flash.info(json.data);
+        this.$form[0].reset();
     };
 
-    Form.prototype.onError = function() {
+    Form.prototype.onError = function(response) {
         debug('Form::onError');
         this.enableSubmitButtons();
-        Flash.info('Error!');
+        this.clearErrors();
+        var json = JSON.parse(response.responseText);
+        switch (json.code) {
+            case 400:
+                this.setErrors(json.data);
+                break;
+            default:
+                Flash.error(json.data);
+                break;
+        }
     };
 
-    //--------------------------------------------------------------------------
-    // Init
-    //--------------------------------------------------------------------------
+    Form.prototype.clearErrors = function() {
+        this.$form.find('.has-error').removeClass('has-error');
+        this.$form.find('p.error').remove();
+    };
 
-    (function() {
-        $('form').each(function() { new Form($(this)); });
-        $('a').each(function() { new A($(this)); });
-        History.Adapter.bind(window, 'statechange', function() {
-            debug('History::statechange');
-            var State = History.getState();
-            debug(State);
-        });
-    })();
+    Form.prototype.setErrors = function(errors) {
+        debug('Form::setErrors');
+        if (errors) {
+            Flash.error('Please fix the errors in your submission.');
+            var instance = this;
+            $.each(errors, function(k, v) {
+                var $formGroup = instance
+                    .$form
+                    .find('[data-field=' + k + ']');
+                $formGroup.addClass('has-error');
+                $('<p/>')
+                    .addClass('error')
+                    .html(v[0])
+                    .appendTo($formGroup);
+            });
+        }
+    };
+
+    //-------------------------------------------------------------------------
+    // Init
+    //-------------------------------------------------------------------------
+
+    $('form').each(function() { new Form($(this)); });
+    $('.work-list').masonry({ columnWidth: 320 });
 
 })(jQuery);

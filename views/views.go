@@ -12,21 +12,25 @@ var (
 
 func SetFolder(newViewFolder string) {
 	viewFolder = newViewFolder
-	LoadTemplates()
+	ResetTemplates()
 }
 
-func LoadTemplates() {
+func ResetTemplates() {
 	templates = make(map[string]*template.Template, 0)
-	templates["contact"] = template.Must(template.ParseFiles(
-		path.Join(viewFolder, "contact.tpl"),
-		path.Join(viewFolder, "layout.tpl"),
-	))
-	templates["home"] = template.Must(template.ParseFiles(
-		path.Join(viewFolder, "home.tpl"),
-		path.Join(viewFolder, "layout.tpl"),
-	))
 }
 
 func Get(name string) *template.Template {
+	if templates == nil {
+		return nil
+	}
+	tpl, found := templates[name]
+	if found {
+		return tpl
+	}
+	layout := path.Join(viewFolder, "layout.tpl")
+	templates[name] = template.Must(template.ParseFiles(
+		path.Join(viewFolder, name+".tpl"),
+		layout,
+	))
 	return templates[name]
 }
