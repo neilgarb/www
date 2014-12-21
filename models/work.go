@@ -31,7 +31,6 @@ const (
 )
 
 type Work struct {
-	Image       string
 	Type        WorkType
 	Name        string
 	Description template.HTML
@@ -43,7 +42,6 @@ type Work struct {
 func AllWorks() []*Work {
 	works := make([]*Work, 0)
 	works = append(works, &Work{
-		"/static/img/neilgarb_co_za.png",
 		WorkTypePersonal,
 		"neilgarb.co.za",
 		template.HTML(`This website, built in barebones Go. With a bit of gorilla. The frontend is built with vanilla jQuery.  <a href="https://github.com/NeilGarb/www">Fork me</a>!`),
@@ -52,7 +50,6 @@ func AllWorks() []*Work {
 		1,
 	})
 	works = append(works, &Work{
-		"/static/img/yadda_co_za.png",
 		WorkTypePersonal,
 		"yadda.co.za",
 		template.HTML(`A group buying aggregator,  <em>yadda</em> would poll 20+ South African group buying and daily deal websites and send subscribed users a daily digest email.`),
@@ -61,7 +58,6 @@ func AllWorks() []*Work {
 		3,
 	})
 	works = append(works, &Work{
-		"/static/img/myqron_co_za.png",
 		WorkTypePersonal,
 		"myqron.co.za",
 		template.HTML(`Myqron acted as a translator between pull services such as RSS and push services, in this case web hooks.  It would poll the feeds you configured and post to a selected address when a new entry was found.`),
@@ -70,7 +66,6 @@ func AllWorks() []*Work {
 		2,
 	})
 	works = append(works, &Work{
-		"/static/img/americanflat.png",
 		WorkTypeFreelance,
 		"Americanflat",
 		template.HTML(`Built an image processor in Python to compose artworks and various media into web and print-ready images using ImageMagick.  For example, an artwork might be composed with a blank canvas to create an image of the artwork on the canvas.`),
@@ -79,7 +74,6 @@ func AllWorks() []*Work {
 		2,
 	})
 	works = append(works, &Work{
-		"/static/img/udotest.png",
 		WorkTypeFreelance,
 		"UDoTest",
 		template.HTML(`Built simple e-commerce website offering private home HPV tests. The platform integrates with with courier APIs, testing labs and diagnosing doctors.`),
@@ -88,7 +82,6 @@ func AllWorks() []*Work {
 		4,
 	})
 	works = append(works, &Work{
-		"/static/img/kaluma.png",
 		WorkTypeProfessional,
 		"Kaluma",
 		"Senior PHP developer, working on core services. The Kaluma platform is a process-orientated workflow management tool.",
@@ -97,7 +90,6 @@ func AllWorks() []*Work {
 		10,
 	})
 	works = append(works, &Work{
-		"/static/img/superbalist.png",
 		WorkTypeProfessional,
 		"Superbalist",
 		"Rebuilt API using Laravel. The superbalist.com website and backoffice are powered by this.",
@@ -106,7 +98,6 @@ func AllWorks() []*Work {
 		8,
 	})
 	works = append(works, &Work{
-		"/static/img/takealot.png",
 		WorkTypeProfessional,
 		"TAKEALOT",
 		"Introduced Python into the TAKEALOT stack and it has become the language of choice for their core services. Worked on various projects, including the management of data imports and ETL (20m+ records updated on a daily and weekly basis).",
@@ -115,7 +106,6 @@ func AllWorks() []*Work {
 		13,
 	})
 	works = append(works, &Work{
-		"/static/img/zoopy.png",
 		WorkTypeProfessional,
 		"Zoopy",
 		"Lead developer at Zoopy for three years. The platform changed shape a number of times, and the stack changed accordingly.  Built the API, transcoding platform and backoffice all in PHP/ZF. The platform was hosted in AWS and we used Rightscale to manage our deployment.",
@@ -124,7 +114,6 @@ func AllWorks() []*Work {
 		42,
 	})
 	works = append(works, &Work{
-		"/static/img/oi.png",
 		WorkTypeProfessional,
 		"Ogilvy Interactive",
 		"As a senior PHP developer I worked primarily on the VW account. Dabbled in digital strategy.",
@@ -133,7 +122,6 @@ func AllWorks() []*Work {
 		12,
 	})
 	works = append(works, &Work{
-		"/static/img/go2africa.png",
 		WorkTypeProfessional,
 		"Go2Africa",
 		"Built G2A's PHP platform, TravelQuest, using CakePHP. The platform had to cater for a strong in-house SEO and content team, and integrate with the business's booking software.",
@@ -142,7 +130,6 @@ func AllWorks() []*Work {
 		13,
 	})
 	works = append(works, &Work{
-		"/static/img/iol.png",
 		WorkTypeProfessional,
 		"Independent Online",
 		"As a senior developer, I worked on a number of projects including IOLJobs and the INMSA (IOL's parent company) image library, used as an archive for photos after they were published (photos were indexed using their embedded IPTC profiles).",
@@ -151,7 +138,6 @@ func AllWorks() []*Work {
 		30,
 	})
 	works = append(works, &Work{
-		"/static/img/flickswitch.png",
 		WorkTypeFreelance,
 		"Flickswitch",
 		"Built a basic vanilla PHP frontend for Flickswitch.",
@@ -160,7 +146,6 @@ func AllWorks() []*Work {
 		1,
 	})
 	works = append(works, &Work{
-		"/static/img/bitcoin.png",
 		WorkTypeFreelance,
 		"- Under NDA -",
 		"Built a full-stack PHP/MySQL application with frontend and admin. Includes a fully-functional Bitcoin wallet, as well as some custom cryptographic work.",
@@ -169,11 +154,18 @@ func AllWorks() []*Work {
 		6,
 	})
 	works = append(works, &Work{
-		"/static/img/avision.png",
 		WorkTypeFreelance,
 		"AVIsion",
 		"Built a hardware inventory management tool for AVIsion.  The back-office tool allowed staff around the country to register new hardware and log/acknowledge faults.",
 		[]Tech{"PHP", "MySQL"},
+		"",
+		2,
+	})
+	works = append(works, &Work{
+		WorkTypeFreelance,
+		"codecaine.co.za",
+		"My blog for several months in 2007.  It ran on a custom blogging platform I wrote in PHP/Zend Framework.  It support authoring, commenting and even WP-compatible pingback handling.",
+		[]Tech{"PHP", "MySQL", "Zend Framework"},
 		"",
 		2,
 	})
