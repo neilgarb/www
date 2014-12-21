@@ -75,7 +75,7 @@
                 </a>
             </div>
             <div class="column" style="width: 20%;">
-                <a class="contact contact-linkedin" href="">
+                <a class="contact contact-linkedin" href="http://za.linkedin.com/pub/neil-garb/8/278/b70">
                     <span></span>
                     Neil Garb
                 </a>

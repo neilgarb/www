@@ -134,10 +134,36 @@
     };
 
     //-------------------------------------------------------------------------
+    // ContactLink
+    //-------------------------------------------------------------------------
+
+    var ContactLink = function($el) {
+        this.$el = $el;
+        this.$el.click(this.onClick.bind(this));
+    };
+
+    ContactLink.prototype.onClick = function(e) {
+        var href = this.$el.attr('href');
+        ga(
+            'send',
+            'event',
+            'outbound',
+            'click',
+            href,
+            {
+                'hitCallback': function () {
+                    document.location = href;
+                }
+            }
+        );
+    };
+
+    //-------------------------------------------------------------------------
     // Init
     //-------------------------------------------------------------------------
 
     $('form').each(function() { new Form($(this)); });
     $('.work-list').masonry({ columnWidth: 320 });
+    $('a.contact').each(function() { new ContactLink($(this)); });
 
 })(jQuery);

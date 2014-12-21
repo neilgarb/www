@@ -7,6 +7,11 @@ import (
 	"github.com/NeilGarb/www/views"
 )
 
+var (
+	allWorks  = models.AllWorks()
+	workTechs = models.WorkTechs()
+)
+
 type HomeController struct{}
 
 func NewHomeController() *HomeController {
@@ -32,8 +37,8 @@ func (self *HomeController) Get(w http.ResponseWriter, r *http.Request) {
 	}{
 		Title:       "Neil Garb - Web and Software Development",
 		Description: "I'm a freelance software developer based in Cape Town, South Africa, specializing in PHP, Python and Go.",
-		Works:       models.AllWorks(),
-		Techs:       models.WorkTechs(),
+		Works:       allWorks,
+		Techs:       workTechs,
 	}
 	err := views.Get("home").ExecuteTemplate(w, "layout", page)
 	if err != nil {
