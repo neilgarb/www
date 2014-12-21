@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="/static/vendor/reset.css" type="text/css" />
         <link rel="stylesheet" href="/static/www.css" type="text/css" />
         <title>{{.Title}}</title>
+        <meta name="description" content="{{.Description}}" />
     </head>
     <body>
         <script type="text/javascript">

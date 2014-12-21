@@ -25,13 +25,15 @@ func (self *HomeController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func (self *HomeController) Get(w http.ResponseWriter, r *http.Request) {
 	page := &struct {
-		Title string
-		Works []*models.Work
-		Techs map[models.Tech]float64
+		Title       string
+		Description string
+		Works       []*models.Work
+		Techs       map[models.Tech]float64
 	}{
-		Title: "Home",
-		Works: models.AllWorks(),
-		Techs: models.WorkTechs(),
+		Title:       "Neil Garb - Web and Software Development",
+		Description: "I'm a freelance software developer based in Cape Town, South Africa, specializing in PHP, Python and Go.",
+		Works:       models.AllWorks(),
+		Techs:       models.WorkTechs(),
 	}
 	err := views.Get("home").ExecuteTemplate(w, "layout", page)
 	if err != nil {
