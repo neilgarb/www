@@ -3,11 +3,12 @@
 <html>
     <head>
         <meta charset="utf-8" />
+        <meta name="description" content="{{.Description}}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{{.Title}}</title>
         <link rel="stylesheet" href="/static/vendor/reset.css" type="text/css" />
         <link rel="stylesheet" href="/static/www.css" type="text/css" />
         <link rel="shortcut icon" href="/static/favicon.ico" />
-        <title>{{.Title}}</title>
-        <meta name="description" content="{{.Description}}" />
     </head>
     <body>
         <script type="text/javascript">
