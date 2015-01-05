@@ -1,11 +1,11 @@
 {{define "body"}}
-<div class="home">
+<div class="home h-resume">
     <div class="container">
-        <h1>Neil Garb <small>Web and Software Development</small></h1>
+        <h1 class="p-name">Neil Garb <small>Web and Software Development</small></h1>
         <div class="row">
             <div class="column" style="width: 33.333333%;">
                 <h2>Who am I?</h2>
-                <p>My name is Neil Garb and I'm a software engineer based in Cape Town, South Africa. My specialities are PHP and Python web development, though I build software in Java and Go as well. I have a Bachelor of Science degree from the University of Cape Town, and have been building software for 15 years.</p>
+                <p class="p-summary">My name is Neil Garb and I'm a software engineer based in Cape Town, South Africa. My specialities are PHP and Python web development, though I build software in Java and Go as well. I have a Bachelor of Science degree from the University of Cape Town, and have been building software for 15 years.</p>
             </div>
             <div class="column" style="width: 33.333333%;">
                 <h2>What do I offer?</h2>
@@ -28,7 +28,7 @@
             <div class="column" style="width: 33.333333%;">
                 <dl class="tech-list">
                     {{range $k, $v := .Techs}}
-                    <dt>{{$k}}</dt>
+                    <dt class="p-skill">{{$k}}</dt>
                         <dd>
                             <span style="width: {{$v}}%;"></span>
                         </dd>
@@ -55,15 +55,15 @@
             </div>
         </div>
         <h2>How can you get in touch with me?</h2>
-        <div class="row">
+        <div class="row h-card">
             <div class="column" style="width: 20%;">
-                <a class="contact contact-email" href="mailto:info@neilgarb.co.za">
+                <a class="contact contact-email u-email" href="mailto:info@neilgarb.co.za">
                     <span></span>
                     info@neilgarb.co.za
                 </a>
             </div>
             <div class="column" style="width: 20%;">
-                <a class="contact contact-twitter" href="https://twitter.com/neil_garb">
+                <a class="contact contact-twitter u-url" href="https://twitter.com/neil_garb">
                     <span></span>
                     @neil_garb
                 </a>
@@ -75,13 +75,13 @@
                 </a>
             </div>
             <div class="column" style="width: 20%;">
-                <a class="contact contact-linkedin" href="http://za.linkedin.com/pub/neil-garb/8/278/b70">
+                <a class="contact contact-linkedin u-url" href="http://za.linkedin.com/pub/neil-garb/8/278/b70">
                     <span></span>
                     Neil Garb
                 </a>
             </div>
             <div class="column" style="width: 20%;">
-                <a class="contact contact-github" href="https://github.com/NeilGarb">
+                <a class="contact contact-github u-url" href="https://github.com/NeilGarb">
                     <span></span>
                     NeilGarb
                 </a>
@@ -92,10 +92,10 @@
 {{end}}
 
 {{define "work"}}
-<div class="work" data-type="{{.Type}}" data-techs=" {{range .Techs}}{{.Slug}} {{end}}">
-    <div class="work-body">
-        <h4>{{.Name}}</h4>
-        <p>{{.Description}}</p>
+<div class="work p-experience" data-type="{{.Type}}" data-techs=" {{range .Techs}}{{.Slug}} {{end}}">
+    <div class="work-body h-event">
+        <h4 class="p-name">{{.Name}}</h4>
+        <p class="p-summary">{{.Description}}</p>
     </div>
 </div>
 {{end}}
